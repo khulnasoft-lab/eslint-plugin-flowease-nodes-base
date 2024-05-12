@@ -3,50 +3,51 @@
  */
 module.exports = {
 	root: true,
-
 	env: {
 		browser: true,
-		es6: true,
-		node: true,
+		es2021: true,
 	},
-
-	parser: '@typescript-eslint/parser',
-
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: ['./tsconfig.json'],
-		sourceType: 'module',
-		extraFileExtensions: ['.json'],
+		ecmaVersion: "latest",
+		sourceType: "module",
+		project: ["./tsconfig.json"],
 	},
-
-	ignorePatterns: ['.eslintrc.js', '**/*.js', '**/node_modules/**', '**/dist/**'],
-
-	overrides: [
-		{
-			files: ['package.json'],
-			plugins: ['eslint-plugin-flowease-nodes-base'],
-			extends: ['plugin:flowease-nodes-base/community'],
-			rules: {
-				'flowease-nodes-base/community-package-json-name-still-default': 'off',
-			},
-		},
-		{
-			files: ['./credentials/**/*.ts'],
-			plugins: ['eslint-plugin-flowease-nodes-base'],
-			extends: ['plugin:flowease-nodes-base/credentials'],
-			rules: {
-				'flowease-nodes-base/cred-class-field-documentation-url-missing': 'off',
-				'flowease-nodes-base/cred-class-field-documentation-url-miscased': 'off',
-			},
-		},
-		{
-			files: ['./nodes/**/*.ts'],
-			plugins: ['eslint-plugin-flowease-nodes-base'],
-			extends: ['plugin:flowease-nodes-base/nodes'],
-			rules: {
-				'flowease-nodes-base/node-execute-block-missing-continue-on-fail': 'off',
-				'flowease-nodes-base/node-resource-description-filename-against-convention': 'off',
-				'flowease-nodes-base/node-param-fixed-collection-type-unsorted-items': 'off',
-			},
-		},
+	plugins: [
+		"@typescript-eslint/eslint-plugin",
+		"eslint-plugin-import",
+		"eslint-plugin-prettier",
+		"eslint-plugin-eslint-plugin",
 	],
+	extends: [
+		"eslint-config-airbnb-typescript/base",
+		"plugin:@typescript-eslint/recommended",
+		"eslint-config-prettier",
+		"plugin:eslint-plugin/recommended",
+	],
+	rules: {
+		// https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue
+		"arrow-body-style": "off",
+		"prefer-arrow-callback": "off",
+
+		"@typescript-eslint/ban-ts-comment": "off",
+		"@typescript-eslint/no-use-before-define": "off",
+		"@typescript-eslint/naming-convention": [
+			"error",
+			{
+				selector: "variable",
+				format: ["camelCase", "PascalCase", "UPPER_CASE"],
+				leadingUnderscore: "allow",
+			},
+		],
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				argsIgnorePattern: "^_",
+				destructuredArrayIgnorePattern: "^_",
+				varsIgnorePattern: "^_",
+				ignoreRestSiblings: true,
+			},
+		],
+	},
 };

@@ -1,0 +1,24 @@
+# Workflow only meant to be manually run to test the `lint-codebase` command
+name: Test lint-codebase
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-lint-codebase-command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out commit
+        uses: actions/checkout@v3
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Set up Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Lint codebase
+        run: pnpm lint-codebase

@@ -1,8 +1,9 @@
-node_modules
-.DS_Store
-.tmp
-tmp
 dist
-npm-debug.log*
-yarn.lock
-.vscode/launch.json
+node_modules
+!scratchpad/node_modules
+.DS_Store
+.todo
+scripts/downloads/*
+.eslintplugin.js
+scratchpad/codebase/*
+package-lock.json
